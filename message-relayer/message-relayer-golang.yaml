@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: message-relayer-golang
+  name: message-relayer-golang
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: message-relayer-golang
+  strategy:
+    rollingUpdate:
+  template:
+    metadata:
+      labels:
+        run: message-relayer-golang
+    spec:
+      hostname: message-relayer-golang
+      containers:
+      - name: message-relayer-golang
+        tty: true
+        image: message-relayer-golang
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: RABBITMQ_URL
+          value: amqp://guest:guest@rabbitmq:5672/%2F
+        - name: QUEUE_FROM
+          value: test_a
+        - name: QUEUE_TO
+          value: test_b
+        ports:
+        - containerPort: 12345
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: message-relayer-golang
+  name: message-relayer-golang
+spec:
+  selector:
+    run: message-relayer-golang
+  type: ClusterIP
+  ports:
+  - port: 12345
+    targetPort: 12345
+    protocol: TCP
+---

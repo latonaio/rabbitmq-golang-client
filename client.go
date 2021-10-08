@@ -119,10 +119,10 @@ func (r *RabbitmqClient) checkConnection() {
 
 			// 受信中だった場合、再購読
 			if err := r.stop(); err != nil {
-				log.Printf("[RabbitmqClient] failed to stop on reconnecting: %v\n", err)
+				log.Printf("[RabbitmqClient] failed to stop on reconnecting: %v", err)
 			}
 			if _, err := r.Iterator(); err != nil {
-				log.Printf("[RabbitmqClient] failed to iterate on reconnecting: %v\n", err)
+				log.Printf("[RabbitmqClient] failed to iterate on reconnecting: %v", err)
 				return
 			}
 
@@ -194,10 +194,9 @@ func (r *RabbitmqClient) Iterator() (<-chan RabbitmqMessage, error) {
 						continue
 					}
 
-					log.Printf("%v %v\n", msgs, m)
 					msg, err := NewRabbitmqMessage(m, r)
 					if err != nil {
-						log.Printf("[RabbitmqClient] failed to parse as json: %v\n", err)
+						log.Printf("[RabbitmqClient] failed to parse as json: %v", err)
 						m.Nack(false, false)
 						return
 					}
@@ -251,7 +250,6 @@ func decodeJSON(body []byte) (map[string]interface{}, error) {
 	if err := json.Unmarshal(body, &jsonData); err != nil {
 		return nil, fmt.Errorf("JSON decode error: %w", err)
 	}
-	log.Printf("message : %v\n", jsonData)
 
 	return jsonData, nil
 }
@@ -329,7 +327,6 @@ func (rm *RabbitmqMessage) Data() map[string]interface{} {
 }
 
 func (r *RabbitmqMessage) Success() error {
-	log.Printf("deliverytag: %v\n", r.message.DeliveryTag)
 	if err := r.client.Success(r.message.DeliveryTag); err != nil {
 		return err
 	}
