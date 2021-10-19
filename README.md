@@ -1,8 +1,6 @@
 # rabbitmq-golang-client
 
-## 概要
-
-RabbitMQ に接続し、メッセージを送受信するためのシンプルな Go 言語用クライアントライブラリです。
+rabbitmq-golang-client は、RabbitMQ に接続し、メッセージを送受信するためのシンプルな Go 言語用クライアントライブラリです。
 
 
 ## 導入方法
@@ -10,7 +8,7 @@ RabbitMQ に接続し、メッセージを送受信するためのシンプル�
 go get でインストールしてください。
 
 ```sh
-go get "bitbucket.org/latonaio/rabbitmq-golang-client@develop"
+go get "github.com/latonaio/rabbitmq-golang-client"
 ```
 
 
@@ -21,7 +19,7 @@ go get "bitbucket.org/latonaio/rabbitmq-golang-client@develop"
 import 文を追加します。
 
 ```go
-import rabbitmq "bitbucket.org/latonaio/rabbitmq-golang-client"
+import rabbitmq "github.com/latonaio/rabbitmq-golang-client"
 ```
 
 `rabbitmq.NewRabbitmqClient("<URL>", []string{"<受信するキュー名>"...}, []string{"<送信するキュー名>"...})` でクライアントを作成します。
