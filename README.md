@@ -1,7 +1,12 @@
 # rabbitmq-golang-client
 
-rabbitmq-golang-client は、RabbitMQ に接続し、メッセージを送受信するためのシンプルな Go 言語用クライアントライブラリです。
+rabbitmq-golang-client は、RabbitMQ に接続し、メッセージを送受信するためのシンプルな、Golang ランタイム のための ライブラリです。  
 
+## 動作環境
+
+* OS: Linux
+* CPU: ARM/AMD/Intel
+* Golang Runtime
 
 ## 導入方法
 
