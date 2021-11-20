@@ -14,7 +14,7 @@ rabbitmq-golang-client は、RabbitMQ に接続し、メッセージを送受信
 go get でインストールしてください。
 
 ```sh
-go get "github.com/latonaio/rabbitmq-golang-client"
+go get github.com/latonaio/rabbitmq-golang-client@v1.0.0-temp1
 ```
 
 
