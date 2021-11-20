@@ -1,4 +1,4 @@
-module bitbucket.org/latonaio/rabbitmq-golang-client
+module github.com/latonaio/rabbitmq-golang-client
 
 go 1.16
 
