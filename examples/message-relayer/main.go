@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	rabbitmq "bitbucket.org/latonaio/rabbitmq-golang-client"
+	rabbitmq "github.com/latonaio/rabbitmq-golang-client"
 )
 
 func main() {

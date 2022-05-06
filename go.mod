@@ -1,6 +1,6 @@
-module bitbucket.org/latonaio/rabbitmq-golang-client
+module github.com/latonaio/rabbitmq-golang-client
 
-go 1.16
+go 1.18
 
 require (
 	github.com/streadway/amqp v1.0.0
