@@ -24,6 +24,7 @@ type RabbitmqClient struct {
 	cancel        context.CancelFunc
 	isClosed      bool
 	iteratorCh    chan RabbitmqMessage
+	tempMsg       map[string]interface{}
 }
 
 // rabbitmq に接続してクライアントを作る
@@ -254,13 +255,28 @@ func decodeJSON(body []byte) (map[string]interface{}, error) {
 	return jsonData, nil
 }
 
+func (r *RabbitmqClient) AddSendTemp(payload map[string]interface{}) {
+	if len(r.tempMsg) == 0 {
+		r.tempMsg = make(map[string]interface{}, len(payload))
+	}
+	for k, v := range payload {
+		r.tempMsg[k] = v
+	}
+	return
+}
+
+func (r *RabbitmqClient) DeleteSendTemp() {
+	r.tempMsg = map[string]interface{}{}
+}
+
 func (r *RabbitmqClient) Send(sendQueue string, payload map[string]interface{}) error {
 	q, err := r.channel.QueueInspect(sendQueue)
 	if err != nil {
 		return fmt.Errorf("queue does not exists: %w", err)
 	}
-
-	jsonData, err := json.Marshal(payload)
+	r.AddSendTemp(payload)
+	defer r.DeleteSendTemp()
+	jsonData, err := json.Marshal(r.tempMsg)
 	if err != nil {
 		return fmt.Errorf("json marshal error: %w", err)
 	}

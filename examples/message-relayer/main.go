@@ -11,12 +11,12 @@ func main() {
 	log.Printf("started")
 
 	url := os.Getenv("RABBITMQ_URL")
-	queueFrom := os.Getenv("QUEUE_FROM")
+	queueOrigin := os.Getenv("QUEUE_ORIGIN")
 	queueTo := os.Getenv("QUEUE_TO")
 
 	mq, err := rabbitmq.NewRabbitmqClient(
 		url,
-		[]string{queueFrom},
+		[]string{queueOrigin},
 		[]string{queueTo},
 	)
 	if err != nil {

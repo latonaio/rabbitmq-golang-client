@@ -37,7 +37,7 @@ import rabbitmq "github.com/latonaio/rabbitmq-golang-client"
 ```go
 client, err := rabbitmq.NewRabbitmqClient(
 	"amqp://username:password@hostname:5672/virtualhost",
-	[]string{"queue_from"},
+	[]string{"queue_origin"},
 	[]string{"queue_to"}
 )
 if err != nil {
